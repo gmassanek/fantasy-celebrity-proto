@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @team.title %>
+</p>
+
+<h3>Players</h3>
+<table>
+  <thead>
+    <th>Slot</th>
+    <th>Player (pos)</th>
+  </thead>
+  <tbody>
+    <% @team.players.each do |player| %>
+      <tr>
+        <td><%= player.position.name %></td>
+        <td><%= player.full_name %> (<%= player.position.name %>)</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= link_to 'Edit', edit_team_path(@team) %> |
+  <%= link_to 'Back', teams_path %>
+</p>

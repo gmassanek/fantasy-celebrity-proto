@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @position.name %>
+</p>
+
+<h3>Players</h3>
+<ul>
+  <% @position.players.each do |player| %>
+    <li><%= player.first_name + " " + player.last_name %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Edit', edit_position_path(@position) %> |
+<%= link_to 'Back', positions_path %>
