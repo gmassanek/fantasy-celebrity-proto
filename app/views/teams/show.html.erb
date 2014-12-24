@@ -5,17 +5,23 @@
   <%= @team.title %>
 </p>
 
-<h3>Players</h3>
+<h3>Roster</h3>
 <table>
   <thead>
     <th>Slot</th>
     <th>Player (pos)</th>
   </thead>
   <tbody>
-    <% @team.players.each do |player| %>
+    <% @team.starters.each do |roster_slot| %>
       <tr>
-        <td><%= player.position.name %></td>
-        <td><%= player.full_name %> (<%= player.position.name %>)</td>
+        <td><%= roster_slot.slot.name %></td>
+        <td><%= roster_slot.player.full_name %> (<%= roster_slot.player.position.abbreviation %>)</td>
+      </tr>
+    <% end %>
+    <% @team.bench.each do |roster_slot| %>
+      <tr>
+        <td><%= roster_slot.slot.name %></td>
+        <td><%= roster_slot.player.full_name %> (<%= roster_slot.player.position.abbreviation %>)</td>
       </tr>
     <% end %>
   </tbody>

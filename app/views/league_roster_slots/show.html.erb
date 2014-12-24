@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @league_roster_slot.position_id %>
+</p>
+
+<p>
+  <strong>League:</strong>
+  <%= @league_roster_slot.league_id %>
+</p>
+
+<%= link_to 'Edit', edit_league_roster_slot_path(@league_roster_slot) %> |
+<%= link_to 'Back', league_roster_slots_path %>

@@ -1,5 +1,5 @@
 class Player < ActiveRecord::Base
-  belongs_to :position
+  belongs_to :position, :required => true
   has_many :roster_slots
   has_many :teams, :through => :roster_slots
 

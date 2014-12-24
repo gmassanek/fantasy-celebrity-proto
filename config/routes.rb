@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :league_roster_slots
+
+  resources :leagues
+
   resources :positions
 
   resources :players

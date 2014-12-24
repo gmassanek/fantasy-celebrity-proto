@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @league.name %>
+</p>
+
+<h3>Roster Slots</h3>
+<table>
+  <thead>
+    <th>Slot</th>
+    <th>Count</th>
+  </thead>
+  <tbody>
+    <% @league.league_roster_slots.each do |slot| %>
+      <tr>
+        <td><%= slot.position.name %></td>
+        <td><%= slot.count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>Teams</h3>
+<table>
+  <thead>
+    <th>Name</th>
+  </thead>
+  <tbody>
+    <% @league.teams.each do |team| %>
+      <tr>
+        <td><%= link_to team.title, team %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_league_path(@league) %> |
+<%= link_to 'Back', leagues_path %>

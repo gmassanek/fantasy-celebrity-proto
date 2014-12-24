@@ -3,7 +3,7 @@ class CreateRosterSlots < ActiveRecord::Migration
     create_table :roster_slots do |t|
       t.integer :player_id
       t.integer :team_id
-      t.string :slot
+      t.integer :slot_id
 
       t.timestamps null: false
     end

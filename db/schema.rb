@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141224174654) do
+ActiveRecord::Schema.define(version: 20141224213856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "league_roster_slots", force: :cascade do |t|
+    t.integer  "position_id"
+    t.integer  "league_id"
+    t.integer  "count"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "leagues", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "players", force: :cascade do |t|
     t.string   "first_name"
@@ -34,13 +48,14 @@ ActiveRecord::Schema.define(version: 20141224174654) do
   create_table "roster_slots", force: :cascade do |t|
     t.integer  "player_id"
     t.integer  "team_id"
-    t.string   "slot"
+    t.integer  "slot_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "teams", force: :cascade do |t|
     t.string   "title"
+    t.integer  "league_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
