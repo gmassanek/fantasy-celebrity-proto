@@ -23,7 +23,20 @@
       <th>Player (pos)</th>
     </thead>
     <tbody>
-      <% @team.roster_slots.each do |roster_slot| %>
+      <% @team.starters.each do |roster_slot| %>
+        <%= f.fields_for 'roster_slots[]', roster_slot do |rsf| %>
+          <tr>
+            <td><%= rsf.collection_select :slot_id, available_positions(@team, roster_slot.player), :id, :name %></td>
+            <td>
+              <%= roster_slot.player.full_name %> (<%= roster_slot.player.position.abbreviation %>)
+              <%= rsf.hidden_field :player_id, :value => roster_slot.player_id %>
+              <%= rsf.hidden_field :id, :value => roster_slot.id %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+
+      <% @team.bench.each do |roster_slot| %>
         <%= f.fields_for 'roster_slots[]', roster_slot do |rsf| %>
           <tr>
             <td><%= rsf.collection_select :slot_id, available_positions(@team, roster_slot.player), :id, :name %></td>
