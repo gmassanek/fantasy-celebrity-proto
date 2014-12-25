@@ -16,10 +16,28 @@
     <%= f.text_field :title %>
   </div>
 
-  <div class="field">
-    <%= f.label :players %><br>
-    <%= f.collection_select :player_ids, Player.order(:last_name), :id, :full_name, {}, {:multiple => true} %>
-  </div>
+  <h3>Roster</h3>
+  <table>
+    <thead>
+      <th>Slot</th>
+      <th>Player (pos)</th>
+    </thead>
+    <tbody>
+      <% @team.roster_slots.each do |roster_slot| %>
+        <%= f.fields_for 'roster_slots[]', roster_slot do |rsf| %>
+          <tr>
+            <td><%= rsf.collection_select :slot_id, available_positions(@team, roster_slot.player), :id, :name %></td>
+            <td>
+              <%= roster_slot.player.full_name %> (<%= roster_slot.player.position.abbreviation %>)
+              <%= rsf.hidden_field :player_id, :value => roster_slot.player_id %>
+              <%= rsf.hidden_field :id, :value => roster_slot.id %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -41,7 +41,7 @@ class TeamsController < ApplicationController
   # PATCH/PUT /teams/1.json
   def update
     respond_to do |format|
-      if @team.update(team_params)
+      if @team.update(team_params) && @team.update_positions(params[:team][:roster_slots])
         format.html { redirect_to @team, notice: 'Team was successfully updated.' }
         format.json { render :show, status: :ok, location: @team }
       else
@@ -64,11 +64,15 @@ class TeamsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team
-      @team = Team.find(params[:id])
+      @team = Team.where(:id => params[:id])
+        .includes(:roster_slots => [:player, :slot])
+        .includes(:players)
+        .includes(:league => {:league_roster_slots => :position})
+        .first
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:title, :player_ids => [])
+      params.require(:team).permit(:title, :roster_slots => [])
     end
 end
