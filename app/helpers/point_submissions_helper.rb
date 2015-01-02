@@ -1,0 +1,2 @@
+module PointSubmissionsHelper
+end

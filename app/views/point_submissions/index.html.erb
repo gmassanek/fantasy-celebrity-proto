@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Point Submissions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Proof url</th>
+      <th>Scorigin statistic</th>
+      <th>Points</th>
+      <th>Player</th>
+      <th>Status</th>
+      <th>Comment</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @point_submissions.each do |point_submission| %>
+      <tr>
+        <td><%= point_submission.proof_url %></td>
+        <td><%= point_submission.scoring_statistic.description %></td>
+        <td><%= point_submission.points %></td>
+        <td><%= point_submission.player.full_name %></td>
+        <td><%= point_submission.status %></td>
+        <td><%= point_submission.comment %></td>
+        <td><%= link_to 'Show', point_submission %></td>
+        <td><%= link_to 'Edit', edit_point_submission_path(point_submission) %></td>
+        <td><%= link_to 'Destroy', point_submission, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Point submission', new_point_submission_path %>

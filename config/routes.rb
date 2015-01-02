@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :point_submissions
+
   resources :scoring_statistics
 
   resources :scoring_categories

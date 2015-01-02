@@ -289,3 +289,22 @@ ScoringStatistic.delete_all
 ].each do |cat, desc, pts|
   ScoringStatistic.create!(:description => desc, :scoring_category => ScoringCategory.find_by_name(cat), :suggested_points => pts)
 end
+
+[
+  [
+    'http://www.sportingnews.com/ncaa-football/story/2015-01-01/jameis-winston-fumble-memes-odell-beckham-jr-lance-stephenson-fsu-oregon-rose-bowl',
+    ScoringStatistic.offset(rand(ScoringStatistic.count)).first,
+    'submitted',
+    Player.offset(rand(Player.count)).first,
+    'Sorry Jameis'
+  ]
+].each do |proof_url, stat, status, player, comment|
+  PointSubmission.create!(
+    :proof_url => proof_url,
+    :scoring_statistic => stat,
+    :points => stat.suggested_points, # Should come from league settings
+    :status => status,
+    :player => player,
+    :comment => comment
+  )
+end

@@ -35,5 +35,8 @@
   </tbody>
 </table>
 
-<%= link_to 'Edit', edit_league_path(@league) %> |
-<%= link_to 'Back', leagues_path %>
+<p>
+  <%= link_to 'Edit', edit_league_path(@league) %> |
+  <%= link_to 'Back', leagues_path %>
+  <%= link_to 'Submit Points', new_point_submission_path %>
+</p>
