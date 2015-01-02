@@ -10,19 +10,15 @@
   <thead>
     <th>Slot</th>
     <th>Player (pos)</th>
+    <th>Points</th>
+    <th>Actions</th>
   </thead>
   <tbody>
     <% @team.starters.each do |roster_slot| %>
-      <tr>
-        <td><%= roster_slot.slot.name %></td>
-        <td><%= roster_slot.player.full_name %> (<%= roster_slot.player.position.abbreviation %>)</td>
-      </tr>
+      <%= render 'teams/roster_slot', :roster_slot => roster_slot %>
     <% end %>
     <% @team.bench.each do |roster_slot| %>
-      <tr>
-        <td><%= roster_slot.slot.name %></td>
-        <td><%= roster_slot.player.full_name %> (<%= roster_slot.player.position.abbreviation %>)</td>
-      </tr>
+      <%= render 'teams/roster_slot', :roster_slot => roster_slot %>
     <% end %>
   </tbody>
 </table>

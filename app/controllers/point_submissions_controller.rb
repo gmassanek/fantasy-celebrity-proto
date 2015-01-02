@@ -4,7 +4,7 @@ class PointSubmissionsController < ApplicationController
   # GET /point_submissions
   # GET /point_submissions.json
   def index
-    @point_submissions = PointSubmission.all
+    @point_submissions = PointSubmission.where(point_submission_query_params)
   end
 
   # GET /point_submissions/1
@@ -14,7 +14,7 @@ class PointSubmissionsController < ApplicationController
 
   # GET /point_submissions/new
   def new
-    @point_submission = PointSubmission.new
+    @point_submission = PointSubmission.new(point_submission_query_params)
   end
 
   # GET /point_submissions/1/edit
@@ -70,5 +70,10 @@ class PointSubmissionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def point_submission_params
       params.require(:point_submission).permit(:proof_url, :scoring_statistic_id, :points, :player_id, :comment, :status)
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def point_submission_query_params
+      params.permit(:proof_url, :scoring_statistic_id, :points, :player_id)
     end
 end

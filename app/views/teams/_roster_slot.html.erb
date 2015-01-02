@@ -1,0 +1,9 @@
+<tr>
+  <td><%= roster_slot.slot.name %></td>
+  <td><%= roster_slot.player.full_name %> (<%= roster_slot.player.position.abbreviation %>)</td>
+  <td><%= roster_slot.player.approved_points %> </td>
+  <td>
+    <%= link_to 'Submit Points', new_point_submission_path(:player_id => roster_slot.player) %>
+    <%= link_to 'Point Submissions', point_submissions_path(:player_id => roster_slot.player) %>
+  </td>
+</tr>
