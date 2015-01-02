@@ -66,7 +66,7 @@ class TeamsController < ApplicationController
     def set_team
       @team = Team.where(:id => params[:id])
         .includes(:roster_slots => [:player, :slot])
-        .includes(:players)
+        .includes(:players => :roster_slots)
         .includes(:league => {:league_roster_slots => :position})
         .first
     end

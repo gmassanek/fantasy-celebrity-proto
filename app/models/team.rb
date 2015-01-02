@@ -56,4 +56,12 @@ class Team < ActiveRecord::Base
   def bench
     roster_slots.select { |rs| rs.slot == Position.bench }
   end
+
+  def points
+    players.with_point_submissions.inject(0){ |sum, ps| sum + ps.approved_points }
+  end
+
+  def self.by_score
+    all.sort_by { |t| -1 * t.points }
+  end
 end

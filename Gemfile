@@ -52,4 +52,5 @@ group :development, :test do
 
   gem 'rspec', '~> 3.1.0'
   gem 'rspec-rails', '~> 3.1.0'
+  gem 'faker', '~> 1.4.3'
 end

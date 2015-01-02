@@ -285,26 +285,19 @@ ScoringStatistic.delete_all
   ['Other', 'Caught harboring illegal immigrants', 150],
   ['Other', 'Caught smuggling monkeys or rare birds', 200],
   ['Other', 'Caught clubbing baby seals', 200],
-  ['Other', 'Seen stale fishing', 45]
+  ['Other', 'Seen stale fishing', 45],
+  ['Other', 'Other']
 ].each do |cat, desc, pts|
   ScoringStatistic.create!(:description => desc, :scoring_category => ScoringCategory.find_by_name(cat), :suggested_points => pts)
 end
 
-[
-  [
-    'http://www.sportingnews.com/ncaa-football/story/2015-01-01/jameis-winston-fumble-memes-odell-beckham-jr-lance-stephenson-fsu-oregon-rose-bowl',
-    ScoringStatistic.offset(rand(ScoringStatistic.count)).first,
-    'submitted',
-    Player.offset(rand(Player.count)).first,
-    'Sorry Jameis'
-  ]
-].each do |proof_url, stat, status, player, comment|
+PointSubmission.delete_all
+150.times do
   PointSubmission.create!(
-    :proof_url => proof_url,
-    :scoring_statistic => stat,
-    :points => stat.suggested_points, # Should come from league settings
-    :status => status,
-    :player => player,
-    :comment => comment
+    :proof_url => Faker::Internet.url('example.com'),
+    :scoring_statistic => ScoringStatistic.offset(rand(ScoringStatistic.count)).first,
+    :status => ['submitted', 'approved', 'rejected'].shuffle.first,
+    :player => Player.offset(rand(Player.count)).first,
+    :comment => Faker::Lorem.sentence(6)
   )
 end

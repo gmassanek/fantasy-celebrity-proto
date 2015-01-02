@@ -11,4 +11,12 @@ class Player < ActiveRecord::Base
   def approved_points
     point_submissions.where(:status => 'approved').sum(:points)
   end
+
+  def self.with_point_submissions
+    includes(:point_submissions)
+  end
+
+  def self.by_score
+    with_point_submissions.sort_by { |ps| -1 * ps.approved_points }
+  end
 end

@@ -41,13 +41,18 @@ ActiveRecord::Schema.define(version: 20150102181915) do
   create_table "point_submissions", force: :cascade do |t|
     t.string   "proof_url"
     t.integer  "scoring_statistic_id"
+    t.string   "scoring_statistic_override"
     t.float    "points"
     t.integer  "player_id"
     t.text     "comment"
     t.string   "status"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
+
+  add_index "point_submissions", ["player_id"], name: "index_point_submissions_on_player_id", using: :btree
+  add_index "point_submissions", ["points"], name: "index_point_submissions_on_points", using: :btree
+  add_index "point_submissions", ["status"], name: "index_point_submissions_on_status", using: :btree
 
   create_table "positions", force: :cascade do |t|
     t.string   "name"
@@ -71,7 +76,7 @@ ActiveRecord::Schema.define(version: 20150102181915) do
   end
 
   create_table "scoring_statistics", force: :cascade do |t|
-    t.text     "description"
+    t.string   "description"
     t.integer  "scoring_category_id"
     t.float    "suggested_points"
     t.datetime "created_at",          null: false
