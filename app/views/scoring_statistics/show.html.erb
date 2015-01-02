@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @scoring_statistic.description %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @scoring_statistic.scoring_category_id %>
+</p>
+
+<p>
+  <strong>Suggested points:</strong>
+  <%= @scoring_statistic.suggested_points %>
+</p>
+
+<%= link_to 'Edit', edit_scoring_statistic_path(@scoring_statistic) %> |
+<%= link_to 'Back', scoring_statistics_path %>

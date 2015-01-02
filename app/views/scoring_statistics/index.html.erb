@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Scoring Statistics</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Suggested points</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @scoring_statistics.each do |scoring_statistic| %>
+      <tr>
+        <td><%= scoring_statistic.description %></td>
+        <td><%= scoring_statistic.scoring_category.name %></td>
+        <td><%= scoring_statistic.suggested_points %></td>
+        <td><%= link_to 'Show', scoring_statistic %></td>
+        <td><%= link_to 'Edit', edit_scoring_statistic_path(scoring_statistic) %></td>
+        <td><%= link_to 'Destroy', scoring_statistic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Scoring statistic', new_scoring_statistic_path %>

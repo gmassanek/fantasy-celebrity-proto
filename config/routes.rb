@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :scoring_statistics
+
+  resources :scoring_categories
+
   resources :league_roster_slots
 
   resources :leagues

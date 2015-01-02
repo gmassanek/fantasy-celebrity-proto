@@ -1,0 +1,2 @@
+module ScoringCategoriesHelper
+end
