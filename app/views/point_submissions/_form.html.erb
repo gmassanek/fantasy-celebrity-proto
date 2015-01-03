@@ -20,6 +20,10 @@
     <%= f.collection_select :scoring_statistic_id, ScoringStatistic.order(:description), :id, :description %>
   </div>
   <div class="field">
+    <%= f.label :scoring_statistic_override %><br>
+    <%= f.text_field :scoring_statistic_override %>
+  </div>
+  <div class="field">
     <%= f.label :points %><br>
     <%= f.text_field :points %>
   </div>

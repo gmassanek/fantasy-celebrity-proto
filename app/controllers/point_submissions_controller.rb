@@ -69,7 +69,7 @@ class PointSubmissionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def point_submission_params
-      params.require(:point_submission).permit(:proof_url, :scoring_statistic_id, :points, :player_id, :comment, :status)
+      params.require(:point_submission).permit(:proof_url, :scoring_statistic_id, :points, :player_id, :comment, :status, :scoring_statistic_override)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

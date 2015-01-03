@@ -1,3 +1,5 @@
+require 'waiver_wire'
+
 Position.delete_all
 [
   ["Politician", "POLT"],
@@ -178,7 +180,7 @@ order = []
 players = Player.all.to_a
 order.each do |team|
   player = players.pop
-  team.assign_player(player, player.position)
+  WaiverWire.add_player(team, player.id)
 end
 
 ScoringCategory.delete_all
@@ -301,3 +303,5 @@ PointSubmission.delete_all
     :comment => Faker::Lorem.sentence(6)
   )
 end
+
+

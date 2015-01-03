@@ -19,7 +19,7 @@
     <% @point_submissions.each do |point_submission| %>
       <tr>
         <td><%= point_submission.proof_url %></td>
-        <td><%= point_submission.scoring_statistic.description %></td>
+        <td><%= point_submission.scoring_description %></td>
         <td><%= point_submission.points %></td>
         <td><%= point_submission.player.full_name %></td>
         <td><%= point_submission.status %></td>

@@ -1,18 +1,19 @@
+require 'waiver_wire'
+
 class Team < ActiveRecord::Base
   has_many :roster_slots
   has_many :players, :through => :roster_slots
+  has_many :player_transactions
   belongs_to :league
 
   validate :valid_roster
 
-  def assign_player(player, position)
-    if room_for_player_as?(player, position)
-      roster_slots.create!(:player => player, :slot => position)
-    elsif room_for_player_as?(player, Position.flex)
-      roster_slots.create!(:player => player, :slot => Position.flex)
-    elsif room_for_player_as?(player, Position.bench)
-      roster_slots.create!(:player => player, :slot => Position.bench)
-    end
+  def roster_slot_for_player(player)
+    self.roster_slot_for_player_id(player.id)
+  end
+
+  def roster_slot_for_player_id(player_id)
+    self.roster_slots.find_or_initialize_by(:player_id => player_id)
   end
 
   def update_positions(roster_slot_params)
@@ -21,7 +22,11 @@ class Team < ActiveRecord::Base
       roster_slot.slot_id = attrs[:slot_id].to_i
     end
 
-    valid? && roster_slots.all?(&:save)
+    if valid?
+      roster_slot_params.each do |_, attrs|
+        WaiverWire.assign(self, attrs[:player_id].to_i, attrs[:slot_id].to_i)
+      end
+    end
   end
 
   def valid_roster

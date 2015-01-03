@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :player_transactions
+
   resources :point_submissions
 
   resources :scoring_statistics

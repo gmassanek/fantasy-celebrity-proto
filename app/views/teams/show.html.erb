@@ -14,11 +14,33 @@
     <th>Actions</th>
   </thead>
   <tbody>
-    <% @team.starters.each do |roster_slot| %>
+    <% @team.starters.sort_by { |rs| rs.slot.name }.each do |roster_slot| %>
       <%= render 'teams/roster_slot', :roster_slot => roster_slot %>
     <% end %>
-    <% @team.bench.each do |roster_slot| %>
+    <% @team.bench.sort_by { |rs| rs.slot.name }.each do |roster_slot| %>
       <%= render 'teams/roster_slot', :roster_slot => roster_slot %>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>Player Transactions</h3>
+<table>
+  <thead>
+    <th>Time</th>
+    <th>Action</th>
+    <th>Player</th>
+    <th>Old Position</th>
+    <th>New Position</th>
+  </thead>
+  <tbody>
+    <% @team.player_transactions.order('created_at DESC').each do |transaction| %>
+      <tr>
+        <td><%= transaction.created_at %></td>
+        <td><%= transaction.action %></td>
+        <td><%= transaction.player.full_name %></td>
+        <td><%= transaction.old_position.try(:name) %></td>
+        <td><%= transaction.new_position.name %></td>
+      </tr>
     <% end %>
   </tbody>
 </table>

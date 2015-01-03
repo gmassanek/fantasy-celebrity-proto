@@ -7,4 +7,8 @@ class PointSubmission < ActiveRecord::Base
   def default_points
     self.points ||= scoring_statistic.suggested_points
   end
+
+  def scoring_description
+    self.scoring_statistic_override || scoring_statistic.description
+  end
 end
